@@ -163,15 +163,16 @@ border: #30333b
         mainCont.classList.add("cont");
 
         let handleDel = (id) => {
-            let newValues = values.splice(id, id);
             delete values[id];
             GM_setValue("NovelNotesData", values);
             mainCont.innerHTML = "";
-            values.forEach((n, i) => {
-                mainCont.appendChild(
-                    createNoteElement(i, n.url, n.sel, n.note),
-                );
-            });
+            if (values.length > 0) {
+                values.forEach((n, i) => {
+                    mainCont.appendChild(
+                        createNoteElement(i, n.url, n.sel, n.note),
+                    );
+                });
+            }
             document.body.appendChild(mainCont);
         };
 
@@ -216,9 +217,16 @@ border: #30333b
 
             return noteBox;
         };
-        values.forEach((n, i) => {
-            mainCont.appendChild(createNoteElement(i, n.url, n.sel, n.note));
-        });
+        console.log(values);
+        if (values.length > 0) {
+            values.forEach((n, i) => {
+                mainCont.appendChild(
+                    createNoteElement(i, n.url, n.sel, n.note),
+                );
+            });
+        }
+        let arr = [];
+
         document.body.appendChild(mainCont);
         const styles = document.createElement("style");
         styles.nonce = "8IBTHwOdqNKAWeKl7plt8g==";
