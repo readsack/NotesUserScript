@@ -163,7 +163,7 @@ border: #30333b
         mainCont.classList.add("cont");
 
         let handleDel = (id) => {
-            delete values[id];
+            values = values.filter((_, index) => index !== id);
             GM_setValue("NovelNotesData", values);
             mainCont.innerHTML = "";
             if (values.length > 0) {
